@@ -17,5 +17,5 @@ if(!$query){
 } else{
     // header('Location:view_obat.php');
     // exit;
-    echo "<script>location.href='../select/view_obat.php';</script>"; //pindah ke halaman obat jika berhasil
+    echo "<script>location.href='../select/view_pelanggan.php';</script>"; //pindah ke halaman obat jika berhasil
 } 

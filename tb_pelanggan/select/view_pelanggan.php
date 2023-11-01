@@ -16,7 +16,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_pelanggan ORDER BY id_pelangga
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>View Pelanggan</title>
     <style>
     body {
         font-family: Arial, sans-serif;

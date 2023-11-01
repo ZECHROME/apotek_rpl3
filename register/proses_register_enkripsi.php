@@ -1,5 +1,5 @@
 <?php
-include "../koneksi.php";
+include "../../koneksi.php";
 
 $id_karyawan = $_POST['id_karyawan'];
 $username_rgst = $_POST['username'];
@@ -26,5 +26,4 @@ if($cek_username['0'] != 0){
         exit;
     } 
 }
-
 ?>

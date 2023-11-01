@@ -10,6 +10,7 @@
 <body>
     <center>
         <form action="proses_login_dekripsi.php" method="POST">
+            <!-- <form action="proses_login_cookies.php" method="POST"> -->
             <table>
                 <tr>
                     <td>Username</td>
