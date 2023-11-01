@@ -98,7 +98,6 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_pelanggan ORDER BY id_pelangga
         border-radius: 50%;
         background-color: blue;
         background-color: black;
-        opacity: .5;
     }
 
     .navbar {

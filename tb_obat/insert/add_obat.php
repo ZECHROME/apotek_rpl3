@@ -109,7 +109,6 @@
         border-radius: 50%;
         background-color: blue;
         background-color: black;
-        opacity: .5;
     }
 
     .navbar {

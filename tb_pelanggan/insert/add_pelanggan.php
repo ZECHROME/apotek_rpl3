@@ -113,7 +113,6 @@
         border-radius: 50%;
         background-color: blue;
         background-color: black;
-        opacity: .5;
     }
 
     .navbar {
@@ -643,7 +642,7 @@
                         <small>setting obat</small>
                     </a>
                     <ul>
-                        <li><a href="../../tb_obat/select/view_obat.php><i class=" fa fa-globe"></i>View Obat</a></li>
+                        <li><a href="../../tb_obat/select/view_obat.php"><i class=" fa fa-globe"></i>View Obat</a></li>
                         <li><a href="../../tb_obat/insert/add_obat.php"><i class="fa fa-trophy"></i>Add Obat</a></li>
                     </ul>
                 </li>

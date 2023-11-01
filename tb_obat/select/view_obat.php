@@ -95,7 +95,6 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_obat INNER JOIN tb_supplier US
         border-radius: 50%;
         background-color: blue;
         background-color: black;
-        opacity: .5;
     }
 
     .navbar {
