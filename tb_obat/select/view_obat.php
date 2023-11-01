@@ -16,11 +16,12 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_obat INNER JOIN tb_supplier US
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>View Obat</title>
 
     <style>
     body {
         font-family: Arial, sans-serif;
+        background-color: #f6f7f0;
     }
 
     table {
@@ -42,7 +43,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_obat INNER JOIN tb_supplier US
     }
 
     th {
-        background-color: #333;
+        background-color: #007BFF;
         color: #fff;
     }
 
@@ -92,7 +93,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_obat INNER JOIN tb_supplier US
                 <td><?= $baris['harga_beli']; ?></td>
                 <td><?= $baris['stok_obat']; ?></td>
                 <td><?= $baris['keterangan']; ?></td>
-                <td><a href="../update/edit_obat.php?idobat=<?= $baris['id_obat'];?>">edit</a></td>
+                <td><a href="../update/edit_obat.php?idobat=<?= $baris['id_obat'];?>">Edit</a></td>
 
                 <?php
                  $id_obat = $baris['id_obat'];

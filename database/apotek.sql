@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 24, 2023 at 03:57 PM
+-- Generation Time: Nov 01, 2023 at 01:03 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `apotek_rpl1`
+-- Database: `apotek`
 --
 
 -- --------------------------------------------------------
@@ -28,21 +28,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tb_detail_transaksi` (
-  `iddetailtransaksi` int(4) NOT NULL,
-  `idtransaksi` int(3) NOT NULL,
-  `idobat` int(4) NOT NULL,
+  `id_detail_transaksi` int(4) NOT NULL,
+  `id_transaksi` int(5) NOT NULL,
+  `id_obat` int(4) NOT NULL,
   `jumlah` int(3) NOT NULL,
-  `hargasatuan` double NOT NULL,
-  `totalharga` double NOT NULL
+  `harga_satuan` double NOT NULL,
+  `total_harga` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_detail_transaksi`
 --
 
-INSERT INTO `tb_detail_transaksi` (`iddetailtransaksi`, `idtransaksi`, `idobat`, `jumlah`, `hargasatuan`, `totalharga`) VALUES
-(2, 2, 18, 12, 3, 20000),
-(3, 2, 21, 22, 3, 20000);
+INSERT INTO `tb_detail_transaksi` (`id_detail_transaksi`, `id_transaksi`, `id_obat`, `jumlah`, `harga_satuan`, `total_harga`) VALUES
+(1, 2, 1, 5, 10000, 50000);
 
 -- --------------------------------------------------------
 
@@ -51,8 +50,8 @@ INSERT INTO `tb_detail_transaksi` (`iddetailtransaksi`, `idtransaksi`, `idobat`,
 --
 
 CREATE TABLE `tb_karyawan` (
-  `idkaryawan` int(4) NOT NULL,
-  `namakaryawan` varchar(50) NOT NULL,
+  `id_karyawan` int(4) NOT NULL,
+  `nama_karyawan` varchar(50) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `telp` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -61,10 +60,11 @@ CREATE TABLE `tb_karyawan` (
 -- Dumping data for table `tb_karyawan`
 --
 
-INSERT INTO `tb_karyawan` (`idkaryawan`, `namakaryawan`, `alamat`, `telp`) VALUES
-(1, 'giyanendra', 'jalan', '0128831293'),
-(2, 'Kadek Nanda Sismawan', 'jalan jalan', '0928093812'),
-(3, 'Rafly alam', 'jalan sekali', '082345334321');
+INSERT INTO `tb_karyawan` (`id_karyawan`, `nama_karyawan`, `alamat`, `telp`) VALUES
+(1, 'Andreas Batak', 'Jl. Batak Karo', '09172648129'),
+(2, 'Sutama Pintar', 'Jl. Terbatak Batak', '0928317238419'),
+(3, 'Zaenal Anjay', 'Jl. Zhu Bajie', '09823718293'),
+(4, 'Yoga Bibidong', 'Jl. Cina Tercinacina', '0891627391');
 
 -- --------------------------------------------------------
 
@@ -75,17 +75,18 @@ INSERT INTO `tb_karyawan` (`idkaryawan`, `namakaryawan`, `alamat`, `telp`) VALUE
 CREATE TABLE `tb_login` (
   `username` varchar(50) NOT NULL,
   `password` varchar(65) NOT NULL,
-  `leveluser` varchar(50) NOT NULL,
-  `idkaryawan` int(4) NOT NULL
+  `level_user` varchar(50) NOT NULL,
+  `id_karyawan` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_login`
 --
 
-INSERT INTO `tb_login` (`username`, `password`, `leveluser`, `idkaryawan`) VALUES
-('Giya', 'giya', 'admin', 1),
-('Rafly', '$2y$10$RsWfo20j3yCKWXjD.NE.BudZfV7Pby5yTHhJjhyKt9nPXUHsD5HkS', '', 3);
+INSERT INTO `tb_login` (`username`, `password`, `level_user`, `id_karyawan`) VALUES
+('Andreas Batak', 'Chris', 'karyawan', 1),
+('Andreas Batak', 'Chris', 'karyawan', 1),
+('Zaenal Anjay', 'admin', 'admin', 3);
 
 -- --------------------------------------------------------
 
@@ -96,10 +97,10 @@ INSERT INTO `tb_login` (`username`, `password`, `leveluser`, `idkaryawan`) VALUE
 CREATE TABLE `tb_obat` (
   `id_obat` int(4) NOT NULL,
   `id_supplier` int(4) NOT NULL,
-  `namaobat` varchar(100) NOT NULL,
-  `kategoriobat` varchar(50) NOT NULL,
-  `hargajual` double NOT NULL,
-  `hargabeli` double NOT NULL,
+  `nama_obat` varchar(100) NOT NULL,
+  `kategori_obat` varchar(50) NOT NULL,
+  `harga_jual` double NOT NULL,
+  `harga_beli` double NOT NULL,
   `stok_obat` int(11) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -108,13 +109,11 @@ CREATE TABLE `tb_obat` (
 -- Dumping data for table `tb_obat`
 --
 
-INSERT INTO `tb_obat` (`id_obat`, `id_supplier`, `namaobat`, `kategoriobat`, `hargajual`, `hargabeli`, `stok_obat`, `keterangan`) VALUES
-(18, 1, 'Obat', 'Panas Juga', 30000, 15000, 400, '3x sehari'),
-(21, 3, 'Stopcool', 'demam', 3500, 2000, 1002, 'menghilangkan panas demam'),
-(24, 3, 'Obat ini itu', 'Obat Kuat', 500000, 100000, 2344, 'keterangan'),
-(25, 4, 'paracetamol', 'obat panas', 30000, 15000, 56, '3x sehari'),
-(26, 4, 'paracetamol ubah', 'obat panas', 300001, 150001, 51, '3x sehari'),
-(31, 3, 'paracetamol', 'obat panas', 30000, 15000, 200, '3x sehari');
+INSERT INTO `tb_obat` (`id_obat`, `id_supplier`, `nama_obat`, `kategori_obat`, `harga_jual`, `harga_beli`, `stok_obat`, `keterangan`) VALUES
+(1, 1, 'Paracetamol', 'Penyakit Panas', 100000, 40000, 30, '3x Sehari'),
+(2, 1, 'Suyasa', 'Penyakit Kupang', 10000, 20000, 15, '5x sehari'),
+(5, 3, 'Obat Mujair', 'Penyakit Lombok', 35000, 5000, 60, '9x sehari, minum selama sebulan\r\n'),
+(7, 2, 'Strawberry', 'Penyakit Wibu', 1000, 0, 999, 'sebelum nafas, minum obat ini dulu');
 
 -- --------------------------------------------------------
 
@@ -123,20 +122,24 @@ INSERT INTO `tb_obat` (`id_obat`, `id_supplier`, `namaobat`, `kategoriobat`, `ha
 --
 
 CREATE TABLE `tb_pelanggan` (
-  `idpelanggan` int(4) NOT NULL,
-  `namalengkap` varchar(50) NOT NULL,
+  `id_pelanggan` int(4) NOT NULL,
+  `nama_lengkap` varchar(50) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `telp` int(15) NOT NULL,
   `usia` int(3) NOT NULL,
-  `buktifotoresep` varchar(255) NOT NULL
+  `bukti_foto_resep` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_pelanggan`
 --
 
-INSERT INTO `tb_pelanggan` (`idpelanggan`, `namalengkap`, `alamat`, `telp`, `usia`, `buktifotoresep`) VALUES
-(1, 'Kadek Arie Wira Kusuma', 'Jalan Pulau Bungin Gg.Keker No 10 Pedungan, Banjar Pitik', 829293847, 22, 'c0056e98-ec1c-44d6-9d2e-9c20c33616a1.png');
+INSERT INTO `tb_pelanggan` (`id_pelanggan`, `nama_lengkap`, `alamat`, `telp`, `usia`, `bukti_foto_resep`) VALUES
+(1, 'Melkianus Pirlo', 'Jl. Gatsu Barat', 819453627, 22, 'IMG_3367.jpeg'),
+(2, 'Khardika Anjay', 'Jl. Sesetan', 981673281, 56, 'khardika.png'),
+(3, 'Yudho Siswanto', 'Jl. Ketumbar Jawa', 816272831, 34, 'bear.jpg'),
+(4, 'Kenneth Gerald', 'Jl. Suyasa Merdeka', 819781655, 45, 'lampung.jpeg'),
+(5, 'Zaenal Arifin', 'Jl. Kupang Merdeka', 897162838, 27, 'IMG_2718.jpeg');
 
 -- --------------------------------------------------------
 
@@ -157,10 +160,9 @@ CREATE TABLE `tb_supplier` (
 --
 
 INSERT INTO `tb_supplier` (`id_supplier`, `perusahaan`, `telp`, `alamat`, `keterangan`) VALUES
-(1, 'PT.Sejahtera Sentosa', '0928093812', 'Jalan Selamat No 44 Gang Kusuma', 'Persahaan menjual oba Peniscilin'),
-(3, 'PT. Salam Sahaja', '0982324213', 'Jlaan Kecambah No 4', 'perusahaan menjual obat panas'),
-(4, 'PT. INDOBAT', '0928093812', 'jalan Sengaja no 55', 'keterangan'),
-(5, 'SUdi raharja', '0928093812', 'alamat', 'keterangan');
+(1, 'PT. Suarsana Maju', '08123456789', 'Jln. Menuju Kemerdekaan', 'Supplier 1'),
+(2, 'PT. Berry Sejahtera', '089665319782', 'Jln. Sesat', 'Supplier 2'),
+(3, 'PT. Mulyana', '087658493231', 'Jln. Mulia Sekali', 'Supplier 3');
 
 -- --------------------------------------------------------
 
@@ -169,12 +171,12 @@ INSERT INTO `tb_supplier` (`id_supplier`, `perusahaan`, `telp`, `alamat`, `keter
 --
 
 CREATE TABLE `tb_transaksi` (
-  `idtransaksi` int(5) NOT NULL,
-  `idpelanggan` int(4) NOT NULL,
-  `idkaryawan` int(4) NOT NULL,
-  `tgltransaksi` date NOT NULL,
-  `kategoripelanggan` varchar(20) NOT NULL,
-  `totalbayar` double NOT NULL,
+  `id_transaksi` int(5) NOT NULL,
+  `id_pelanggan` int(4) NOT NULL,
+  `id_karyawan` int(4) NOT NULL,
+  `tgl_transaksi` date NOT NULL,
+  `kategori_pelanggan` varchar(20) NOT NULL,
+  `total_bayar` double NOT NULL,
   `bayar` double NOT NULL,
   `kembali` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -183,8 +185,10 @@ CREATE TABLE `tb_transaksi` (
 -- Dumping data for table `tb_transaksi`
 --
 
-INSERT INTO `tb_transaksi` (`idtransaksi`, `idpelanggan`, `idkaryawan`, `tgltransaksi`, `kategoripelanggan`, `totalbayar`, `bayar`, `kembali`) VALUES
-(2, 1, 1, '2023-08-31', 'Umum', 200000, 300000, 10000);
+INSERT INTO `tb_transaksi` (`id_transaksi`, `id_pelanggan`, `id_karyawan`, `tgl_transaksi`, `kategori_pelanggan`, `total_bayar`, `bayar`, `kembali`) VALUES
+(1, 2, 1, '2023-09-14', 'Pelanggan Olog', 20000, 20000, 0),
+(2, 1, 3, '2023-09-20', 'Pelanggan Baik Hati', 50000, 100000, 50000),
+(3, 2, 3, '2023-09-30', 'Pelanggan Olog 2', 10000, 20000, 10000);
 
 --
 -- Indexes for dumped tables
@@ -194,35 +198,34 @@ INSERT INTO `tb_transaksi` (`idtransaksi`, `idpelanggan`, `idkaryawan`, `tgltran
 -- Indexes for table `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
-  ADD PRIMARY KEY (`iddetailtransaksi`),
-  ADD KEY `fk_obat` (`idobat`),
-  ADD KEY `fk_transaksi` (`idtransaksi`);
+  ADD PRIMARY KEY (`id_detail_transaksi`),
+  ADD KEY `id_transaksi` (`id_transaksi`),
+  ADD KEY `id_obat` (`id_obat`);
 
 --
 -- Indexes for table `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
-  ADD PRIMARY KEY (`idkaryawan`);
+  ADD PRIMARY KEY (`id_karyawan`);
 
 --
 -- Indexes for table `tb_login`
 --
 ALTER TABLE `tb_login`
-  ADD PRIMARY KEY (`username`),
-  ADD KEY `fk_karyawan` (`idkaryawan`);
+  ADD KEY `id_karyawan` (`id_karyawan`);
 
 --
 -- Indexes for table `tb_obat`
 --
 ALTER TABLE `tb_obat`
   ADD PRIMARY KEY (`id_obat`),
-  ADD KEY `fk_supplier` (`id_supplier`);
+  ADD KEY `id_supplier` (`id_supplier`);
 
 --
 -- Indexes for table `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
-  ADD PRIMARY KEY (`idpelanggan`);
+  ADD PRIMARY KEY (`id_pelanggan`);
 
 --
 -- Indexes for table `tb_supplier`
@@ -234,9 +237,9 @@ ALTER TABLE `tb_supplier`
 -- Indexes for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  ADD PRIMARY KEY (`idtransaksi`),
-  ADD KEY `fk_pelanggan` (`idpelanggan`),
-  ADD KEY `fk_transaksi_karyawan` (`idkaryawan`);
+  ADD PRIMARY KEY (`id_transaksi`),
+  ADD KEY `id_karyawan` (`id_karyawan`),
+  ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -246,37 +249,37 @@ ALTER TABLE `tb_transaksi`
 -- AUTO_INCREMENT for table `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
-  MODIFY `iddetailtransaksi` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_detail_transaksi` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
-  MODIFY `idkaryawan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_karyawan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_obat`
 --
 ALTER TABLE `tb_obat`
-  MODIFY `id_obat` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_obat` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
-  MODIFY `idpelanggan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pelanggan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_supplier`
 --
 ALTER TABLE `tb_supplier`
-  MODIFY `id_supplier` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_supplier` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `idtransaksi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_transaksi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -286,27 +289,27 @@ ALTER TABLE `tb_transaksi`
 -- Constraints for table `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
-  ADD CONSTRAINT `fk_obat` FOREIGN KEY (`idobat`) REFERENCES `tb_obat` (`id_obat`),
-  ADD CONSTRAINT `fk_transaksi` FOREIGN KEY (`idtransaksi`) REFERENCES `tb_transaksi` (`idtransaksi`);
+  ADD CONSTRAINT `tb_detail_transaksi_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `tb_transaksi` (`id_transaksi`),
+  ADD CONSTRAINT `tb_detail_transaksi_ibfk_2` FOREIGN KEY (`id_obat`) REFERENCES `tb_obat` (`id_obat`);
 
 --
 -- Constraints for table `tb_login`
 --
 ALTER TABLE `tb_login`
-  ADD CONSTRAINT `fk_karyawan` FOREIGN KEY (`idkaryawan`) REFERENCES `tb_karyawan` (`idkaryawan`);
+  ADD CONSTRAINT `tb_login_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `tb_karyawan` (`id_karyawan`);
 
 --
 -- Constraints for table `tb_obat`
 --
 ALTER TABLE `tb_obat`
-  ADD CONSTRAINT `fk_supplier` FOREIGN KEY (`id_supplier`) REFERENCES `tb_supplier` (`id_supplier`);
+  ADD CONSTRAINT `tb_obat_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `tb_supplier` (`id_supplier`);
 
 --
 -- Constraints for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  ADD CONSTRAINT `fk_pelanggan` FOREIGN KEY (`idpelanggan`) REFERENCES `tb_pelanggan` (`idpelanggan`),
-  ADD CONSTRAINT `fk_transaksi_karyawan` FOREIGN KEY (`idkaryawan`) REFERENCES `tb_karyawan` (`idkaryawan`);
+  ADD CONSTRAINT `tb_transaksi_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `tb_karyawan` (`id_karyawan`),
+  ADD CONSTRAINT `tb_transaksi_ibfk_2` FOREIGN KEY (`id_pelanggan`) REFERENCES `tb_pelanggan` (`id_pelanggan`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

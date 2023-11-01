@@ -14,6 +14,7 @@ if($cek > 0){
     $_SESSION['username'] = $user;
     $_SESSION['level'] = $baris_level['leveluser'];
     echo "<script>alert('Berhasil Login');window.location.href='tb_obat/select/view_obat.php'</script>";
+    // echo "<script>alert('Berhasil Login');window.location.href='tb_pelanggan/select/view_pelanggan.php'</script>";
 }else{
     echo "<script>alert('Gagal Login');window.location.href='login.php'</script>";
 }

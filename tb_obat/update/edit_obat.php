@@ -18,6 +18,8 @@ $row = mysqli_fetch_assoc($query_obat);
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
+        background-color: #f0f0f0;
+        /* Background color for the entire page */
     }
 
     h1 {
@@ -33,15 +35,18 @@ $row = mysqli_fetch_assoc($query_obat);
     }
 
     #title {
-        color: #FF6347;
+        color: #007BFF;
+        /* Blue as the primary color */
     }
 
     #form {
         width: 50%;
-        border: 1px solid #ccc;
         padding: 20px;
-        border-radius: 5px;
-        background-color: #DCDCDC;
+        border-radius: 10px;
+        background-color: #ffffff;
+        /* White background */
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.5);
+        /* Neumorphism shadow */
     }
 
     label {
@@ -49,6 +54,8 @@ $row = mysqli_fetch_assoc($query_obat);
         margin-bottom: 5px;
         font-family: 'Poppins';
         font-weight: bold;
+        color: #007BFF;
+        /* Blue as the label color */
     }
 
     input[type="text"],
@@ -56,10 +63,12 @@ $row = mysqli_fetch_assoc($query_obat);
     select,
     textarea {
         width: 95%;
-        padding: 8px;
+        padding: 10px;
         margin-bottom: 15px;
         border: 1px solid #ccc;
         border-radius: 3px;
+        background-color: #f0f0f0;
+        /* Light gray background for input fields */
     }
 
     textarea {
@@ -67,19 +76,28 @@ $row = mysqli_fetch_assoc($query_obat);
     }
 
     input[type="submit"] {
-        background-color: #FF6347;
+        background-color: #007BFF;
+        /* Blue as the submit button background color */
         color: #fff;
-        padding: 10px 15px;
+        padding: 12px 20px;
         border: none;
         border-radius: 3px;
         cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        /* Smooth transition */
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+        /* Darker blue on hover */
     }
     </style>
 </head>
 
 <body>
     <div id="all">
-        <h1 id="title">Tambah Obat</h1>
+        <h1 id="title">Edit Obat</h1>
         <form action="proses_edit_obat.php" method="post" id="form">
             <input type="text" hidden id="id_obat" name="id_obat" value="<?=$row['id_obat']?>">
 
