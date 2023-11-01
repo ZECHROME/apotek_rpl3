@@ -70,7 +70,12 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_obat INNER JOIN tb_supplier US
     .container {
         position: relative;
         margin: 0px auto;
+        z-index: 999;
+    }
 
+    .container-two {
+        position: relative;
+        margin: 15px;
     }
 
     .profile {
@@ -78,7 +83,10 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_obat INNER JOIN tb_supplier US
         height: 40px;
         border-radius: 50%;
         background-color: blue;
-        margin: 5px;
+        margin: 8px 0px;
+        margin-left: 15px;
+        position: relative;
+        z-index: 40;
     }
 
     .profile img {
@@ -96,11 +104,13 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_obat INNER JOIN tb_supplier US
         transition: .3s ease;
         position: fixed;
         height: 100%;
+        top: 0;
+        padding-top: 50px;
     }
 
     .navbar.active {
         transform: translateX(0);
-        opacity: 0.98;
+        opacity: 0.95;
         height: 100%;
         background-color: white;
     }
@@ -640,8 +650,6 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_obat INNER JOIN tb_supplier US
         </nav>
     </div>
     <div class="container-two">
-
-
         <?php
         echo "selamat datang ", $_SESSION['username'];
         echo $_SESSION['level'];
