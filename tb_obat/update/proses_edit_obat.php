@@ -13,7 +13,7 @@ $harga_beli = $_POST['harga_beli'];
 $stok_obat = $_POST['stok_obat'];
 $keterangan = $_POST['keterangan'];
 
-$query = mysqli_query($koneksi, "UPDATE tb_obat SET id_supplier='$id_supplier', nama_obat='$nama_obat', kategori_obat='$kategori_obat',harga_jual='$harga_jual', harga_beli='$harga_beli', stok_obat='$stok_obat', keterangan='$keterangan' WHERE id_obat='$id_obat'");
+$query = mysqli_query($koneksi, "UPDATE tb_obat SET id_supplier='$id_supplier', nama_obat='$nama_obat', kategori_obat='$kategori_obat', harga_jual='$harga_jual', harga_beli='$harga_beli', stok_obat='$stok_obat', keterangan='$keterangan' WHERE id_obat='$id_obat'");
 
 // var_dump($query);
 if(!$query){

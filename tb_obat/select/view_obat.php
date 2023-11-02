@@ -8,7 +8,7 @@ if(!@$_SESSION['username']){
     echo "<script>alert('anda karyawan, silahkan login terlebih dahulu');window.location.href='../../login.php';</script>";
 }else{
 
-$query = mysqli_query($koneksi, "SELECT * FROM tb_obat INNER JOIN tb_supplier USING(id_supplier) ORDER BY id_obat DESC");
+$query = mysqli_query($koneksi, "SELECT id_obat, id_supplier, nama_obat, kategori_obat, harga_jual, harga_beli, stok_obat, tb_obat.keterangan AS keterangan FROM tb_obat INNER JOIN tb_supplier USING(id_supplier) ORDER BY id_obat DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -657,7 +657,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_obat INNER JOIN tb_supplier US
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
                     <th>Id Obat</th>
-                    <th>Nama Perusahaan</th>
+                    <th>Id Supplier</th>
                     <th>Nama Obat</th>
                     <th>Kategori Obat</th>
                     <th>Harga Jual</th>

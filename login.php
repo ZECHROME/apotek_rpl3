@@ -202,7 +202,8 @@
     <center>
         <div class="login-box">
             <h2>Login</h2>
-            <form action="proses_login_dekripsi.php" method="POST">
+            <!-- <form action="proses_login_dekripsi.php" method="POST"> -->
+            <form action="proses_login_cookies.php" method="POST">
                 <div class="user-box">
                     <input type="text" name="username" required="">
                     <label>Username</label>
@@ -220,24 +221,6 @@
                 </a>
             </form>
         </div>
-
-        <!-- <form action="proses_login_cookies.php" method="POST"> -->
-        <!-- <form action="proses_login_dekripsi.php" method="POST">
-            <table>
-                <tr>
-                    <td>Username</td>
-                    <td><input type="text" name="username"></td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td><input type="password" name="password"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Login"></td>
-                </tr>
-            </table>
-        </form> -->
     </center>
 </body>
 
